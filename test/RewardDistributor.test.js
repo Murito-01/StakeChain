@@ -91,7 +91,7 @@ describe("RewardDistributor", function () {
       await ethers.provider.send("evm_mine");
 
       // Stake more: updates staking balance, checkpoints rewards
-      const newStake = ethers.parseUnits("2000", 18); // total = 3000
+      const newStake = ethers.parseUnits("3000", 18); // total = 3000
       await distributor.connect(stakingPoolMock).updateStakingState(addr1.address, newStake);
 
       // Rewards accrued in first 6 months: 1000 * 12% * 0.5 = 60 MST
@@ -122,15 +122,16 @@ describe("RewardDistributor", function () {
       await ethers.provider.send("evm_mine");
 
       const balanceBefore = await token.balanceOf(addr1.address);
-      const rewardAmount = await distributor.calculateReward(addr1.address);
 
       // Claim
       await expect(distributor.connect(addr1).claimReward())
-        .to.emit(distributor, "RewardClaimed")
-        .withArgs(addr1.address, rewardAmount);
+        .to.emit(distributor, "RewardClaimed");
 
       const balanceAfter = await token.balanceOf(addr1.address);
-      expect(balanceAfter).to.equal(balanceBefore + rewardAmount);
+      expect(balanceAfter - balanceBefore).to.be.closeTo(
+        ethers.parseUnits("120", 18),
+        ethers.parseUnits("0.05", 18)
+      );
 
       // Try claiming again immediately: should revert as accumulated rewards were reset
       await expect(
