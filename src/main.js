@@ -53,8 +53,10 @@ function getSimulatedTime() {
 
 // UI Elements
 const dom = {
-  modeToggle: document.getElementById("mode-toggle"),
-  statusBadge: document.getElementById("status-badge"),
+  modeSandboxBtn: document.getElementById("mode-sandbox-btn"),
+  modeWeb3Btn: document.getElementById("mode-web3-btn"),
+  statusDot: document.getElementById("status-dot"),
+  statusText: document.getElementById("status-text"),
   connectWalletBtn: document.getElementById("connect-wallet-btn"),
   
   statTVL: document.getElementById("stat-tvl"),
@@ -114,22 +116,30 @@ dom.tabUnstake.addEventListener("click", () => {
   dom.stakeContent.classList.remove("active");
 });
 
-// Mode Toggle (Web3 vs Sandbox)
-dom.modeToggle.addEventListener("change", async (e) => {
-  isWeb3Mode = e.target.checked;
+// Mode Tab Switching
+dom.modeSandboxBtn.addEventListener("click", () => {
   if (isWeb3Mode) {
-    await initWeb3();
-  } else {
+    dom.modeSandboxBtn.classList.add("active");
+    dom.modeWeb3Btn.classList.remove("active");
     initSandbox();
+  }
+});
+
+dom.modeWeb3Btn.addEventListener("click", async () => {
+  if (!isWeb3Mode) {
+    dom.modeWeb3Btn.classList.add("active");
+    dom.modeSandboxBtn.classList.remove("active");
+    await initWeb3();
   }
 });
 
 // INITIALIZE SANDBOX MODE
 function initSandbox() {
   isWeb3Mode = false;
-  dom.modeToggle.checked = false;
-  dom.statusBadge.textContent = "Sandbox Mode";
-  dom.statusBadge.className = "badge badge-sandbox";
+  dom.modeSandboxBtn.classList.add("active");
+  dom.modeWeb3Btn.classList.remove("active");
+  dom.statusText.textContent = "Sandbox Mode";
+  dom.statusDot.className = "dot dot-sandbox";
   dom.connectWalletBtn.style.display = "none";
   dom.sandboxPanel.style.display = "flex";
   
@@ -361,8 +371,8 @@ dom.btnTime7d.addEventListener("click", () => {
 async function initWeb3() {
   dom.sandboxPanel.style.display = "none";
   dom.connectWalletBtn.style.display = "block";
-  dom.statusBadge.textContent = "Disconnected";
-  dom.statusBadge.className = "badge badge-disconnected";
+  dom.statusText.textContent = "Disconnected";
+  dom.statusDot.className = "dot dot-disconnected";
   
   if (!window.ethereum) {
     alert("MetaMask or Web3 wallet not detected. Reverting to Sandbox Mode.");
@@ -391,8 +401,8 @@ async function connectWallet() {
     signer = await provider.getSigner();
     userAddress = await signer.getAddress();
     
-    dom.statusBadge.textContent = "Connected";
-    dom.statusBadge.className = "badge badge-connected";
+    dom.statusText.textContent = "Connected";
+    dom.statusDot.className = "dot dot-connected";
     dom.connectWalletBtn.textContent = `${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`;
     
     // Instantiate contract wrappers

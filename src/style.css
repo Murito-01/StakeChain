@@ -124,37 +124,44 @@ body {
   gap: 1rem;
 }
 
-/* Badges */
-.badge {
-  padding: 0.35rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
+/* Status Indicator & Dot */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border: 1px solid transparent;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--panel-border);
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  user-select: none;
 }
 
-.badge-sandbox {
-  background: rgba(59, 130, 246, 0.1);
-  color: #60a5fa;
-  border-color: rgba(59, 130, 246, 0.2);
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
-.badge-connected {
-  background: rgba(16, 185, 129, 0.1);
-  color: #34d399;
-  border-color: rgba(16, 185, 129, 0.2);
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+.dot-sandbox {
+  background-color: var(--secondary);
+  box-shadow: 0 0 8px var(--secondary);
 }
 
-.badge-disconnected {
-  background: rgba(239, 68, 68, 0.1);
-  color: #f87171;
-  border-color: rgba(239, 68, 68, 0.2);
+.dot-connected {
+  background-color: var(--emerald);
+  box-shadow: 0 0 8px var(--emerald);
 }
 
-/* Toggle Switch styling */
+.dot-disconnected {
+  background-color: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+}
+
+/* Mode Tab Selector styling */
 .mode-selector {
   display: flex;
   align-items: center;
@@ -167,87 +174,38 @@ body {
   color: var(--text-secondary);
 }
 
-.toggle-container {
-  position: relative;
-  width: 160px;
-}
-
-.toggle-checkbox {
-  display: none;
-}
-
-.toggle-label {
-  display: block;
-  overflow: hidden;
-  cursor: pointer;
+.mode-tabs {
+  display: flex;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--panel-border);
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.03);
-  height: 38px;
-  position: relative;
+  padding: 2px;
+  gap: 2px;
 }
 
-.toggle-inner {
-  display: block;
-  width: 200%;
-  margin-left: -100%;
-  transition: margin 0.3s ease-in-out;
-}
-
-.toggle-inner::before, .toggle-inner::after {
-  display: block;
-  float: left;
-  width: 50%;
-  height: 36px;
-  padding: 0;
-  line-height: 36px;
-  font-size: 0.75rem;
-  color: #fff;
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.toggle-inner::before {
-  content: attr(data-yes);
-  padding-left: 20px;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
-  color: var(--text-primary);
-}
-
-.toggle-inner::after {
-  content: attr(data-no);
-  padding-right: 20px;
-  background-color: rgba(255, 255, 255, 0.02);
+.mode-tab-btn {
+  background: none;
+  border: none;
   color: var(--text-secondary);
-}
-
-.toggle-switch {
-  display: block;
-  width: 70px;
-  margin: 4px;
-  background: rgba(255, 255, 255, 0.15);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 80px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
   border-radius: 9999px;
-  transition: all 0.3s ease-in-out;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-fast);
 }
 
-.toggle-checkbox:checked + .toggle-label .toggle-inner {
-  margin-left: 0;
+.mode-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.toggle-checkbox:checked + .toggle-label .toggle-switch {
-  right: 0px;
-  left: 80px;
-  background: var(--primary);
-  border-color: rgba(255,255,255,0.1);
+.mode-tab-btn.active {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #fff;
   box-shadow: 0 0 10px var(--primary-glow);
 }
 

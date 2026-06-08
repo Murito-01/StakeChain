@@ -25,21 +25,21 @@
         <h1>Mini<span class="highlight">Stake</span></h1>
       </div>
       
-      <!-- Mode Toggle Switch -->
+      <!-- Mode Tab Selector -->
       <div class="mode-selector">
         <span class="mode-label">Mode:</span>
-        <div class="toggle-container">
-          <input type="checkbox" id="mode-toggle" class="toggle-checkbox">
-          <label for="mode-toggle" class="toggle-label">
-            <span class="toggle-inner" data-yes="Web3" data-no="Sandbox"></span>
-            <span class="toggle-switch"></span>
-          </label>
+        <div class="mode-tabs">
+          <button id="mode-sandbox-btn" class="mode-tab-btn active">Sandbox</button>
+          <button id="mode-web3-btn" class="mode-tab-btn">Web3</button>
         </div>
       </div>
 
       <div class="connection-status">
-        <span id="status-badge" class="badge badge-sandbox">Sandbox Mode</span>
-        <button id="connect-wallet-btn" class="btn btn-primary btn-sm">Connect Wallet</button>
+        <div class="status-indicator">
+          <span id="status-dot" class="dot dot-sandbox"></span>
+          <span id="status-text">Sandbox Mode</span>
+        </div>
+        <button id="connect-wallet-btn" class="btn btn-primary btn-sm" style="display: none;">Connect Wallet</button>
       </div>
     </header>
 
