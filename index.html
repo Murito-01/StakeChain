@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniStake — ERC-20 Staking Protocol & Dashboard</title>
+  <meta name="description" content="MiniStake staking platform. Stake MST tokens, earn 12% APR rewards, and track your staking positions in real-time.">
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Background glow effects -->
+  <div class="bg-glow bg-glow-purple"></div>
+  <div class="bg-glow bg-glow-blue"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <h1>Mini<span class="highlight">Stake</span></h1>
+      </div>
+      
+      <!-- Mode Toggle Switch -->
+      <div class="mode-selector">
+        <span class="mode-label">Mode:</span>
+        <div class="toggle-container">
+          <input type="checkbox" id="mode-toggle" class="toggle-checkbox">
+          <label for="mode-toggle" class="toggle-label">
+            <span class="toggle-inner" data-yes="Web3" data-no="Sandbox"></span>
+            <span class="toggle-switch"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="connection-status">
+        <span id="status-badge" class="badge badge-sandbox">Sandbox Mode</span>
+        <button id="connect-wallet-btn" class="btn btn-primary btn-sm">Connect Wallet</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Stats Dashboard Row -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+          <div class="stat-info">
+            <span class="stat-label">Total Value Locked</span>
+            <h3 id="stat-tvl">0.00 MST</h3>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">📈</div>
+          <div class="stat-info">
+            <span class="stat-label">Staking APY</span>
+            <h3 id="stat-apy" class="text-emerald">12.00%</h3>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🔒</div>
+          <div class="stat-info">
+            <span class="stat-label">Your Staking Balance</span>
+            <h3 id="stat-staked">0.00 MST</h3>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🎁</div>
+          <div class="stat-info">
+            <span class="stat-label">Wallet Balance</span>
+            <h3 id="stat-balance">0.00 MST</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Panel Grid -->
+      <div class="actions-grid">
+        <!-- Stake & Unstake Panel -->
+        <section class="panel action-panel">
+          <div class="tabs">
+            <button id="tab-stake" class="tab-btn active">Stake Tokens</button>
+            <button id="tab-unstake" class="tab-btn">Unstake Tokens</button>
+          </div>
+
+          <!-- Stake Tab Content -->
+          <div id="stake-content" class="tab-content active">
+            <p class="tab-description">Deposit your MST tokens into the staking pool. Your deposit will be locked for 7 days, and you will earn a 12% annual percentage rate (APR) paid per second.</p>
+            
+            <div class="input-group">
+              <label for="stake-amount">Amount to Stake</label>
+              <div class="input-wrapper">
+                <input type="number" id="stake-amount" placeholder="0.0" min="0" step="any">
+                <button id="btn-stake-max" class="max-btn">MAX</button>
+                <span class="input-suffix">MST</span>
+              </div>
+            </div>
+
+            <div class="button-row">
+              <button id="btn-approve" class="btn btn-secondary">Approve MST</button>
+              <button id="btn-stake" class="btn btn-primary" disabled>Stake MST</button>
+            </div>
+          </div>
+
+          <!-- Unstake Tab Content -->
+          <div id="unstake-content" class="tab-content">
+            <p class="tab-description">Withdraw your staked MST tokens. You can only unstake after the 7-day lock-up period has expired since your last staking action.</p>
+
+            <div class="lock-status-box">
+              <span class="lock-icon">🔒</span>
+              <div class="lock-details">
+                <span class="lock-title">Lock Duration Status</span>
+                <span id="lock-timer" class="lock-value text-warning">No active stake</span>
+              </div>
+            </div>
+            
+            <div class="input-group">
+              <label for="unstake-amount">Amount to Unstake</label>
+              <div class="input-wrapper">
+                <input type="number" id="unstake-amount" placeholder="0.0" min="0" step="any">
+                <button id="btn-unstake-max" class="max-btn">MAX</button>
+                <span class="input-suffix">MST</span>
+              </div>
+            </div>
+
+            <button id="btn-unstake" class="btn btn-primary w-full">Unstake MST</button>
+          </div>
+        </section>
+
+        <!-- Rewards Hub -->
+        <section class="panel rewards-panel">
+          <h2>Rewards Hub</h2>
+          <p class="rewards-description">Your rewards accrue in real-time. You can claim your accumulated reward at any time without resetting your staking lock.</p>
+          
+          <div class="rewards-display">
+            <div class="reward-glow"></div>
+            <span class="rewards-label">Accrued Rewards</span>
+            <div id="rewards-amount" class="rewards-ticker">0.000000</div>
+            <span class="rewards-currency">MST</span>
+          </div>
+
+          <button id="btn-claim" class="btn btn-emerald w-full">Claim Staking Rewards</button>
+        </section>
+      </div>
+
+      <!-- Bottom Panel (Emergency + Sandbox) -->
+      <section class="bottom-grid">
+        <!-- Emergency Withdraw Panel -->
+        <div class="panel danger-panel">
+          <div class="danger-header">
+            <span class="danger-icon">⚠️</span>
+            <h3>Emergency Exit</h3>
+          </div>
+          <p>Instantly withdraw your entire staked balance. This bypasses the 7-day lock period, but <strong>you will forfeit all accrued rewards</strong> as a penalty.</p>
+          <button id="btn-emergency-withdraw" class="btn btn-danger">Emergency Withdraw</button>
+        </div>
+
+        <!-- Sandbox / Time Machine Panel -->
+        <div id="sandbox-panel" class="panel sandbox-panel">
+          <div class="sandbox-header">
+            <span class="sandbox-icon">🛠️</span>
+            <h3>Sandbox Time Machine</h3>
+          </div>
+          <p>Simulate contract interactions and the passage of time on the client. Fast-forward time to see your rewards accrue in real-time!</p>
+          
+          <div class="sandbox-actions">
+            <button id="btn-faucet" class="btn btn-secondary btn-sm">Get 1,000 Faucet MST</button>
+            <button id="btn-time-1h" class="btn btn-dark btn-sm">Fast Forward +1 Hour</button>
+            <button id="btn-time-1d" class="btn btn-dark btn-sm">Fast Forward +1 Day</button>
+            <button id="btn-time-7d" class="btn btn-dark btn-sm">Fast Forward +7 Days</button>
+          </div>
+
+          <div class="console-box">
+            <div class="console-header">Sandbox Event Log</div>
+            <div id="console-logs" class="console-content">
+              <div class="log-entry log-info">> Sandbox initialized. Ready to stake.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2026 MiniStake. Optimized for Gas & Portfolio showcase.</p>
+    </footer>
+  </div>
+
+  <!-- Javascript -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
