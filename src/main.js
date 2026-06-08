@@ -1,11 +1,11 @@
 import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.js";
 
 // Configured contract addresses (populated after deployment)
-// Defaults to standard Hardhat local network address defaults
+// Deployed to Sepolia Test network
 const CONTRACTS = {
-  MST: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  StakingPool: "0x9fE46736679d249a606B237675964e1F15740809",
-  RewardDistributor: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+  MST: "0x82c6Fe60A61f084072cB385E930C6C10f27a9851",
+  StakingPool: "0xA5153d142A8bf41F831B8B19f6782fFF40C498d0",
+  RewardDistributor: "0x74AAe4184f6cC74E679B660d3b563293FB903132"
 };
 
 // Human-readable ABIs for Ethers.js

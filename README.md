@@ -87,12 +87,12 @@ This contract implements advanced gas-saving practices (custom errors, SLOAD mem
 
 ---
 
-## 💻 Deployed Contract Addresses (Local Node)
+## 💻 Deployed Contract Addresses (Sepolia Testnet)
 
-When deployed locally to Hardhat's default network, the contract addresses are:
-- **MiniStakeToken (MST)**: `0x5FbDB2315678afecb367f032d93F642f64180aa3`
-- **RewardDistributor**: `0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512`
-- **StakingPool**: `0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0`
+The contracts are deployed and verified on the Sepolia Test Network:
+- **MiniStakeToken (MST)**: `0x82c6Fe60A61f084072cB385E930C6C10f27a9851`
+- **RewardDistributor**: `0x74AAe4184f6cC74E679B660d3b563293FB903132`
+- **StakingPool**: `0xA5153d142A8bf41F831B8B19f6782fFF40C498d0`
 
 ---
 
