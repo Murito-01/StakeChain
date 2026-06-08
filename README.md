@@ -103,7 +103,7 @@ The application features a premium dark mode layout styled with a glassmorphism 
 2. **Web3 Mode**: Connects to your MetaMask wallet via Ethers.js v6 to interact directly with the contracts running on your local network.
 
 ### Dashboard Preview
-![Dashboard Interface](/home/murito/.gemini/antigravity-ide/brain/6ab8af7b-2a59-4a90-9554-af6e4782d73a/header_layout_verification_1780895391694.png)
+![Dashboard Interface](docs/UI.png)
 
 ---
 
