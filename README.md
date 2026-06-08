@@ -87,12 +87,11 @@ This contract implements advanced gas-saving practices (custom errors, SLOAD mem
 
 ---
 
-## 💻 Deployed Contract Addresses (Sepolia Testnet)
+## 🔗 Deployed Contract Addresses (Sepolia Testnet)
 
-The contracts are deployed and verified on the Sepolia Test Network:
-- **MiniStakeToken (MST)**: `0x82c6Fe60A61f084072cB385E930C6C10f27a9851`
-- **RewardDistributor**: `0x74AAe4184f6cC74E679B660d3b563293FB903132`
-- **StakingPool**: `0xA5153d142A8bf41F831B8B19f6782fFF40C498d0`
+- **MiniStakeToken (MST)**: `0x82c6Fe60A61f084072cB385E930C6C10f27a9851` → [View on Etherscan](https://sepolia.etherscan.io/address/0x82c6Fe60A61f084072cB385E930C6C10f27a9851)
+- **RewardDistributor**: `0x74AAe4184f6cC74E679B660d3b563293FB903132` → [View on Etherscan](https://sepolia.etherscan.io/address/0x74AAe4184f6cC74E679B660d3b563293FB903132)
+- **StakingPool**: `0xA5153d142A8bf41F831B8B19f6782fFF40C498d0` → [View on Etherscan](https://sepolia.etherscan.io/address/0xA5153d142A8bf41F831B8B19f6782fFF40C498d0)
 
 ---
 
