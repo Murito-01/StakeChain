@@ -114,6 +114,7 @@ body {
 .highlight {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -462,10 +463,12 @@ body {
 .input-wrapper input::-webkit-outer-spin-button,
 .input-wrapper input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 .input-wrapper input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .max-btn {
