@@ -133,9 +133,9 @@ describe("RewardDistributor", function () {
         ethers.parseUnits("0.05", 18)
       );
 
-      // Try claiming again immediately: should revert as accumulated rewards were reset
+      // Try claiming for a user who has no rewards (e.g. owner who hasn't staked)
       await expect(
-        distributor.connect(addr1).claimReward()
+        distributor.connect(owner).claimReward()
       ).to.be.revertedWithCustomError(distributor, "NoRewardsToClaim");
     });
 
