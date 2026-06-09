@@ -369,6 +369,7 @@ dom.btnTime7d.addEventListener("click", () => {
 
 // WEB3 NODE INTEGRATION
 async function initWeb3() {
+  isWeb3Mode = true;
   dom.sandboxPanel.style.display = "none";
   dom.connectWalletBtn.style.display = "block";
   dom.statusText.textContent = "Disconnected";
